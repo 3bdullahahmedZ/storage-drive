@@ -1,0 +1,7 @@
+production:
+  driver: local
+  local_storage_path: development_merchant_id
+
+development:
+  driver: local
+  local_storage_path: 'storage/files'
