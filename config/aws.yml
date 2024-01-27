@@ -1,0 +1,13 @@
+production:
+  url:  <%= ENV.fetch("AWS_URL") { 'https://s3.amazonaws.com' } %>
+  bucket: <%= ENV.fetch("AWS_BUCKET") { 'storage-drive-project' } %>
+  access_key: <%= ENV.fetch("AWS_ACCESS_KEY") %>
+  secret_access_key: <%= ENV.fetch("AWS_SECRET_ACCESS_KEY") %>
+  region: <%= ENV.fetch("AWS_REGION") { 'us-east-1' } %>
+
+development:
+  url:  <%= ENV.fetch("AWS_URL") { 'https://s3.amazonaws.com' } %>
+  bucket: <%= ENV.fetch("AWS_BUCKET") { 'storage-drive-project' } %>
+  access_key: <%= ENV.fetch("AWS_ACCESS_KEY") %>
+  secret_access_key: <%= ENV.fetch("AWS_SECRET_ACCESS_KEY") %>
+  region: <%= ENV.fetch("AWS_REGION") { 'us-east-1' } %>
