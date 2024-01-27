@@ -21,7 +21,7 @@ class StorageService < BaseStorageService
     when Blob.storage_types[:local]
       service = LocalStorageService.new
     when Blob.storage_types[:aws]
-      service = AWSStorageService.new
+      service = AwsStorageService.new
     when Blob.storage_types[:database]
       service = DatabaseStorageService.new
     else
