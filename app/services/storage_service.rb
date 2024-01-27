@@ -1,11 +1,12 @@
 class StorageService < BaseStorageService
 
   def save_file(name, file)
+    file = Base64.decode64(file)
     case Rails.configuration.storage_drivers[:driver]
     when 'local'
       service = LocalStorageService.new
     when 'aws'
-      service = AWSStorageService.new
+      service = AwsStorageService.new
     when 'database'
       service = DatabaseStorageService.new
     else
