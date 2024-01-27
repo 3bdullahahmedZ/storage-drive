@@ -6,6 +6,6 @@ class BlobDto
     @id = id
     @data = data
     @size = size
-    @created_at = created_at
+    @created_at = created_at.utc.iso8601
   end
 end
