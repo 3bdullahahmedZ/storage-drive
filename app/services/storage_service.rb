@@ -3,11 +3,11 @@ class StorageService < BaseStorageService
   def save_file(name, file)
     file = Base64.decode64(file)
     case Rails.configuration.storage_drivers[:driver]
-    when 'local'
+    when StorageDrivers::LOCAL
       service = LocalStorageService.new
-    when 'aws'
+    when StorageDrivers::AWS
       service = AwsStorageService.new
-    when 'database'
+    when StorageDrivers::DATABASE
       service = DatabaseStorageService.new
     else
       raise 'Invalid driver'
