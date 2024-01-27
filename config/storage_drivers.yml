@@ -1,7 +1,7 @@
 production:
-  driver: local
-  local_storage_path: development_merchant_id
+  driver: <%= ENV.fetch("STORAGE_DRIVER") { 'local' } %>
+  local_storage_path: <%= ENV.fetch("LOCAL_STORAGE_DRIVER_PATH") { 'storage/files' } %>
 
 development:
-  driver: local
-  local_storage_path: 'storage/files'
+  driver: <%= ENV.fetch("STORAGE_DRIVER") { 'local' } %>
+  local_storage_path: <%= ENV.fetch("LOCAL_STORAGE_DRIVER_PATH") { 'storage/files' } %>
