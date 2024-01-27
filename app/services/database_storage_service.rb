@@ -3,7 +3,7 @@ class DatabaseStorageService < BaseStorageService
 
   def save_file(name, file)
     id = SecureRandom.uuid
-    encoded_file = Base64.encode64(file)
+    encoded_file = Base64.strict_encode64(file)
     stored_file = StoredFile.create(file: encoded_file)
 
     Blob.create(id: id, name: name, storage_type: Blob.storage_types[:database], meta_data: {:stored_file_id => stored_file.id}).save!

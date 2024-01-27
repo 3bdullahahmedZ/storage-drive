@@ -11,7 +11,7 @@ class LocalStorageService < BaseStorageService
   public def get_file(blob)
     location = blob.meta_data['location']
     file = File.open(location, "r")
-    encoded_file = Base64.encode64(file.read)
+    encoded_file = Base64.strict_encode64(file.read)
     BlobDto.new(id: blob.name,data: encoded_file,size: file.size, created_at: blob.created_at)
   end
 

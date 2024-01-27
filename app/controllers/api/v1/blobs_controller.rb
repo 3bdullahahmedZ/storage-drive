@@ -1,4 +1,5 @@
 class Api::V1::BlobsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def save_blob
     params.require([:id, :data])
     name = params[:id]
@@ -8,7 +9,7 @@ class Api::V1::BlobsController < ApplicationController
         render json: { status: 422, message: 'Object with given id exists.' }, status: :conflict
       else
         StorageService.new.save_file(name, file)
-        render status: :created
+        render json: {}, status: :created
       end
     else
       render json: { status: 422, message: 'Invalid base64.' }, status: :unprocessable_entity
@@ -19,10 +20,10 @@ class Api::V1::BlobsController < ApplicationController
     params.require(:id)
     blob = Blob.find_by_name(params[:id])
     if blob
-      data = StorageService.new.get_file(blob)
-      render json: { id: blob.name, data: data.file, size: data.size, created_at: blob.created_at }, status: :ok
+      dto = StorageService.new.get_file(blob)
+      render json: { id: blob.name, data: dto.data, size: dto.size, created_at: dto.created_at }, status: :ok
     else
-      render json: { status: 404, message: 'File not found' }, status: :not_found
+      render json: { status: 404, message: 'Blob not found' }, status: :not_found
     end
   end
 

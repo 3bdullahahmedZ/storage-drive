@@ -17,12 +17,12 @@ class StorageService < BaseStorageService
   end
 
   def get_file(blob)
-    case blob.storage_type
-    when Blob.storage_types[:local]
+    case true
+    when blob.local?
       service = LocalStorageService.new
-    when Blob.storage_types[:aws]
+    when blob.aws?
       service = AwsStorageService.new
-    when Blob.storage_types[:database]
+    when blob.database?
       service = DatabaseStorageService.new
     else
       raise 'Unknown storage type'
