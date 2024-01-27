@@ -10,8 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_23_172605) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_27_160113) do
 # Could not dump table "blobs" because of following StandardError
 #   Unknown type 'uuid' for column 'id'
+
+  create_table "stored_files", force: :cascade do |t|
+    t.text "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
