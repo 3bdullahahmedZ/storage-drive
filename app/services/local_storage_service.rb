@@ -2,9 +2,10 @@
 class LocalStorageService < BaseStorageService
 
   def save_file(name, file)
-    location = Rails.configuration.storage_drivers[:local_storage_path] + '/' + name
+    id = SecureRandom.uuid
+    location = Rails.configuration.storage_drivers[:local_storage_path] + '/' + id
     File.write(location, file)
-    Blob.create(name: name, storage_type: Blob.storage_types[:local], meta_data: {:location => location}).save!
+    Blob.create(id: id, name: name, storage_type: Blob.storage_types[:local], meta_data: {:location => location}).save!
   end
 
   public def get_file(blob)

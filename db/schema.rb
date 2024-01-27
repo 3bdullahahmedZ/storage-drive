@@ -11,13 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_01_23_172605) do
-  create_table "blobs", force: :cascade do |t|
-    t.string "name"
-    t.integer "storage_type"
-    t.json "meta_data", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "unique_names", unique: true
-  end
+# Could not dump table "blobs" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
 
 end
