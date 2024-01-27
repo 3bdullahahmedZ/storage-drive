@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_27_160113) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_27_175811) do
+  create_table "access_tokens", force: :cascade do |t|
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_access_tokens_on_token"
+  end
+
 # Could not dump table "blobs" because of following StandardError
 #   Unknown type 'uuid' for column 'id'
 
