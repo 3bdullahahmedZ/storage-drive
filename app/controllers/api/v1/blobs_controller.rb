@@ -1,19 +1,24 @@
 class Api::V1::BlobsController < ApplicationController
   skip_before_action :verify_authenticity_token
+
   def save_blob
-    params.require([:id, :data])
     name = params[:id]
     file = params[:data]
-    if self.is_base64(file)
-      if Blob.find_by_name(name)
-        render json: { status: 422, message: 'Object with given id exists.' }, status: :conflict
-      else
-        StorageService.new.save_file(name, file)
-        render json: {}, status: :created
-      end
-    else
-      render json: { status: 422, message: 'Invalid base64.' }, status: :unprocessable_entity
+
+    unless name.blank? && file.blank?
+      return render json: { status: 422, message: 'Input missing.' }, status: :unprocessable_entity
     end
+
+    if Blob.find_by_name(name)
+      return render json: { status: 409, message: 'Object with given id exists.' }, status: :conflict
+    end
+
+    unless self.is_base64(file)
+      return render json: { status: 422, message: 'Invalid base64.' }, status: :unprocessable_entity
+    end
+
+    StorageService.new.save_file(name, file)
+    render json: {}, status: :created
   end
 
   def get_blob
