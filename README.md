@@ -52,3 +52,10 @@ development:
   secret_access_key: <%= ENV.fetch("AWS_SECRET_ACCESS_KEY") %>
   region: <%= ENV.fetch("AWS_REGION") { 'us-east-1' } %>
 ``` 
+
+## Authentication
+### Generate Token Command
+```
+rails make:token
+```
+
